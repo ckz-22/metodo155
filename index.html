@@ -1,19 +1,67 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
   <title>Metodo ratinho</title>
   <link rel="icon" type="image/png" href="https://imgur.com/eMIXiU6.png">
   <style>
-    body {
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: Arial, sans-serif;
+      background: #000;
+    }
+
+    /* Tela de carregamento */
+    #loading {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      background: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      z-index: 9999;
+    }
+
+    #loading h1 {
+      color: #39ff14;
+      font-size: 2em;
+      margin-bottom: 20px;
+      animation: neon 1.5s ease-in-out infinite alternate;
+    }
+
+    @keyframes neon {
+      from { text-shadow: 0 0 5px #39ff14, 0 0 10px #39ff14, 0 0 20px #39ff14; }
+      to { text-shadow: 0 0 20px #39ff14, 0 0 30px #39ff14, 0 0 40px #39ff14; }
+    }
+
+    .spinner {
+      border: 5px solid #333;
+      border-top: 5px solid #39ff14;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Conteúdo principal */
+    #content {
+      display: none;
+      height: 100vh;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      height: 100vh;
-      background: #000000; /* fundo preto */
-      font-family: Arial, sans-serif;
     }
+
     .box {
       background: white;
       padding: 20px 30px;
@@ -21,15 +69,17 @@
       text-align: center;
       margin-bottom: 10px;
     }
+
     h1 {
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 10px;
-      color: #39ff14; /* neon verde */
+      color: #39ff14;
       margin-bottom: 20px;
       font-weight: bold;
     }
+
     input {
       padding: 10px;
       margin: 10px 0;
@@ -37,6 +87,7 @@
       border-radius: 5px;
       border: 1px solid #ccc;
     }
+
     button {
       padding: 10px 20px;
       border: none;
@@ -45,61 +96,85 @@
       color: white;
       cursor: pointer;
     }
+
     button:hover {
       background: #45a049;
     }
+
     .small-text {
       font-size: 12px;
       color: #ffffff;
       text-align: center;
       margin-bottom: 10px;
     }
+
     .small-text a {
       color: #39ff14;
       text-decoration: none;
     }
+
     .social-buttons {
       display: flex;
       gap: 15px;
       justify-content: center;
       margin-top: 5px;
     }
+
     .social-buttons img {
       width: 30px;
       height: 30px;
       cursor: pointer;
       transition: transform 0.2s;
     }
+
     .social-buttons img:hover {
       transform: scale(1.2);
     }
+
   </style>
 </head>
 <body>
-  <div class="box">
-    <h1>
-      <img src="https://i.imgur.com/eMIXiU6.png" alt="Logo" style="width:40px; height:40px;">
-      método scam
-    </h1>
-    <h2>Digite a senha</h2>
-    <input type="password" id="senha" placeholder="Senha">
-    <br>
-    <button onclick="verificarSenha()">Entrar</button>
+  <!-- Tela de carregamento -->
+  <div id="loading">
+    <h1>Carregando...</h1>
+    <div class="spinner"></div>
   </div>
 
-  <div class="small-text">
-    TikTok: <a href="https://www.tiktok.com/@plex.sg.ttk" target="_blank">https://www.tiktok.com/@plex.sg.ttk</a>
-  </div>
+  <!-- Conteúdo principal -->
+  <div id="content">
+    <div class="box">
+      <h1>
+        <img src="https://i.imgur.com/eMIXiU6.png" alt="Logo" style="width:40px; height:40px;">
+        método scam
+      </h1>
+      <h2>Digite a senha</h2>
+      <input type="password" id="senha" placeholder="Senha">
+      <br>
+      <button onclick="verificarSenha()">Entrar</button>
+    </div>
 
-  <div class="social-buttons">
-    <img src="https://cdn-icons-png.flaticon.com/512/2111/2111370.png" alt="Discord" onclick="window.open('https://discord.gg/tCVQjBubYu', '_blank')">
-    <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube" onclick="window.open('https://www.youtube.com/@plexgamerplay/featured', '_blank')">
+    <div class="small-text">
+      TikTok: <a href="https://www.tiktok.com/@plex.sg.ttk" target="_blank">https://www.tiktok.com/@plex.sg.ttk</a>
+    </div>
+
+    <div class="social-buttons">
+      <img src="https://cdn-icons-png.flaticon.com/512/2111/2111370.png" alt="Discord" onclick="window.open('https://discord.gg/tCVQjBubYu', '_blank')">
+      <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube" onclick="window.open('https://www.youtube.com/@plexgamerplay/featured', '_blank')">
+    </div>
   </div>
 
   <script>
+    // Simula carregamento
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        document.getElementById('loading').style.display = 'none';
+        document.getElementById('content').style.display = 'flex';
+      }, 2000); // 2 segundos de carregamento
+    });
+
     function verificarSenha() {
       const senha = document.getElementById("senha").value;
-      const senhaCorreta = "metodo155"; // sua senha
+      const senhaCorreta = "metodo155";
       const link = "https://www.roblox.com/share?code=f3bc4b06e8bd4a41bf6aafdf79b349b6&type=Server"; 
 
       if (senha === senhaCorreta) {
